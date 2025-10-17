@@ -5,6 +5,9 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import static org.apache.spark.sql.functions.*;
 
+// Para executar configure os argumentos da seguinte forma:
+// src/main/resources/transactions_data.csv output/basic/amount_by_city
+
 /**
  * Rotina básica que calcula o valor total transacionado por cidade.
  * Agrupa transações por merchant_city e soma os valores.
