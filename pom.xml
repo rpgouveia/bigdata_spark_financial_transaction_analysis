@@ -69,6 +69,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
+                    <!-- Configuração alinhada com a versão do OpenJDK 17 -->
                     <release>17</release>
                 </configuration>
             </plugin>
