@@ -51,11 +51,6 @@
             <artifactId>slf4j-api</artifactId>
             <version>2.0.9</version>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>2.0.9</version>
-        </dependency>
 
         <!-- JUnit para testes (opcional) -->
         <dependency>
@@ -74,8 +69,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <release>17</release>
                 </configuration>
             </plugin>
 
