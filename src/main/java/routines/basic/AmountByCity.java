@@ -1,16 +1,19 @@
 package routines.basic;
 
-import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SparkSession;
-import static org.apache.spark.sql.functions.*;
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaPairRDD;
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
+import scala.Tuple2;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 // Para executar configure os argumentos da seguinte forma:
 // src/main/resources/transactions_data.csv output/basic/amount_by_city
 
 /**
  * Rotina básica que calcula o valor total transacionado por cidade.
- * Agrupa transações por merchant_city e soma os valores.
+ * Usa Spark Core (RDDs) para processar os dados.
  */
 public class AmountByCity {
 
@@ -23,40 +26,60 @@ public class AmountByCity {
         String inputPath = args[0];
         String outputPath = args[1];
 
-        // Cria sessão Spark
-        SparkSession spark = SparkSession.builder()
-                .appName("AmountByCity")
-                .master("local[*]")
-                .config("spark.sql.shuffle.partitions", "8")
-                .getOrCreate();
+        // Cria configuração do Spark
+        SparkConf conf = new SparkConf()
+                .setAppName("AmountByCity")
+                .setMaster("local[*]");
 
-        spark.sparkContext().setLogLevel("WARN");
+        // Cria contexto Spark
+        JavaSparkContext sc = new JavaSparkContext(conf);
+        sc.setLogLevel("WARN");
 
-        // Lê o arquivo CSV
-        Dataset<Row> transactions = spark.read()
-                .option("header", "true")
-                .option("inferSchema", "true")
-                .csv(inputPath);
+        // Lê o arquivo CSV como RDD
+        JavaRDD<String> lines = sc.textFile(inputPath);
 
-        // Remove o cifrão, converte para double, agrupa por cidade, soma os valores e ordena
-        Dataset<Row> result = transactions
-                .withColumn("amount_clean", regexp_replace(col("amount"), "\\$", "").cast("double"))
-                .groupBy("merchant_city")
-                .agg(round(sum("amount_clean"), 2).as("TotalAmount"))
-                .orderBy(desc("TotalAmount"));
+        // Remove o cabeçalho
+        String header = lines.first();
+        JavaRDD<String> data = lines.filter(line -> !line.equals(header));
 
-        // Mostra os resultados no console
-        result.show(20, false);
+        // Mapeia para pares (cidade, valor) e soma por cidade
+        JavaPairRDD<String, Double> cityAmounts = data
+                .mapToPair(line -> {
+                    String[] fields = line.split(",");
+                    String city = fields[7];  // merchant_city
+                    String amountStr = fields[4].replace("$", "");  // amount
+                    Double amount = Double.parseDouble(amountStr);
+                    return new Tuple2<>(city, amount);
+                })
+                .reduceByKey((a, b) -> a + b);
 
-        // Salva os resultados em CSV
-        result.coalesce(1)
-                .write()
-                .mode("overwrite")
-                .option("header", "true")
-                .csv(outputPath);
+        // Arredonda para 2 casas decimais
+        JavaPairRDD<String, Double> roundedAmounts = cityAmounts
+                .mapValues(amount -> {
+                    BigDecimal bd = new BigDecimal(amount);
+                    bd = bd.setScale(2, RoundingMode.HALF_UP);
+                    return bd.doubleValue();
+                });
+
+        // Ordena por valor (decrescente)
+        JavaPairRDD<String, Double> sortedResults = roundedAmounts
+                .mapToPair(tuple -> new Tuple2<>(tuple._2, tuple._1))
+                .sortByKey(false)
+                .mapToPair(tuple -> new Tuple2<>(tuple._2, tuple._1));
+
+        // Mostra os 20 primeiros resultados
+        sortedResults.take(20).forEach(tuple ->
+                System.out.println(tuple._1 + "," + tuple._2)
+        );
+
+        // Salva os resultados
+        sortedResults
+                .map(tuple -> tuple._1 + "," + tuple._2)
+                .coalesce(1)
+                .saveAsTextFile(outputPath);
 
         System.out.println("Results saved to: " + outputPath);
 
-        spark.stop();
+        sc.stop();
     }
 }
