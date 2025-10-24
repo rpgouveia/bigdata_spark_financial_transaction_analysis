@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 // Para executar configure os argumentos da seguinte forma:
-// src/main/resources/transactions_data.csv output/basic/amount_by_client
+// src/main/resources/transactions_data.csv output/spark_core/basic/amount_by_client
 
 /**
  * Rotina básica que calcula o valor total transacionado por cliente.

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 // Para executar configure os argumentos da seguinte forma:
-// src/main/resources/transactions_data.csv output/intermediate/city_statistics
+// src/main/resources/transactions_data.csv output/spark_core/intermediate/city_statistics
 
 /**
  * Rotina intermediária que calcula estatísticas completas por cidade.
