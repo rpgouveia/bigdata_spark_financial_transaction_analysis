@@ -1,8 +1,5 @@
 package routines.intermediate.topcategoriesbycity;
 
-// Para executar configure os argumentos da seguinte forma:
-// src/main/resources/transactions_data.csv output/intermediate/top_categories_by_city
-
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -10,6 +7,9 @@ import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 import java.util.*;
 import java.util.stream.Collectors;
+
+// Para executar configure os argumentos da seguinte forma:
+// src/main/resources/transactions_data.csv output/intermediate/top_categories_by_city
 
 /**
  * Rotina intermediária que identifica as top 3 categorias (MCC) mais frequentes por cidade.
