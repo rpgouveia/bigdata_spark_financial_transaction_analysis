@@ -7,7 +7,6 @@ import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import routines.intermediate.citystatistics.CityStats;
 
 // Para executar configure os argumentos da seguinte forma:
 // src/main/resources/transactions_data.csv output/intermediate/city_statistics
