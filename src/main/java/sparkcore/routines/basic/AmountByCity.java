@@ -1,4 +1,4 @@
-package routines.basic;
+package sparkcore.routines.basic;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
@@ -9,17 +9,17 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 // Para executar configure os argumentos da seguinte forma:
-// src/main/resources/transactions_data.csv output/basic/amount_by_client
+// src/main/resources/transactions_data.csv output/basic/amount_by_city
 
 /**
- * Rotina básica que calcula o valor total transacionado por cliente.
+ * Rotina básica que calcula o valor total transacionado por cidade.
  * Usa Spark Core (RDDs) para processar os dados.
  */
-public class AmountByClient {
+public class AmountByCity {
 
     public static void main(String[] args) {
         if (args.length < 2) {
-            System.err.println("Usage: AmountByClient <input-path> <output-path>");
+            System.err.println("Usage: AmountByCity <input-path> <output-path>");
             System.exit(1);
         }
 
@@ -28,7 +28,7 @@ public class AmountByClient {
 
         // Cria configuração do Spark
         SparkConf conf = new SparkConf()
-                .setAppName("AmountByClient")
+                .setAppName("AmountByCity")
                 .setMaster("local[*]");
 
         // Cria contexto Spark
@@ -42,19 +42,19 @@ public class AmountByClient {
         String header = lines.first();
         JavaRDD<String> data = lines.filter(line -> !line.equals(header));
 
-        // Mapeia para pares (cliente, valor) e soma por cliente
-        JavaPairRDD<String, Double> clientAmounts = data
+        // Mapeia para pares (cidade, valor) e soma por cidade
+        JavaPairRDD<String, Double> cityAmounts = data
                 .mapToPair(line -> {
                     String[] fields = line.split(",");
-                    String client = fields[2];  // client_id
+                    String city = fields[7];  // merchant_city
                     String amountStr = fields[4].replace("$", "");  // amount
                     Double amount = Double.parseDouble(amountStr);
-                    return new Tuple2<>(client, amount);
+                    return new Tuple2<>(city, amount);
                 })
                 .reduceByKey((a, b) -> a + b);
 
         // Arredonda para 2 casas decimais
-        JavaPairRDD<String, Double> roundedAmounts = clientAmounts
+        JavaPairRDD<String, Double> roundedAmounts = cityAmounts
                 .mapValues(amount -> {
                     BigDecimal bd = new BigDecimal(amount);
                     bd = bd.setScale(2, RoundingMode.HALF_UP);

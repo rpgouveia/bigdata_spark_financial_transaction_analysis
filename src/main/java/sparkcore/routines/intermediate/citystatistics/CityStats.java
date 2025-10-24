@@ -1,4 +1,4 @@
-package routines.intermediate.citystatistics;
+package sparkcore.routines.intermediate.citystatistics;
 
 import java.io.Serializable;
 
