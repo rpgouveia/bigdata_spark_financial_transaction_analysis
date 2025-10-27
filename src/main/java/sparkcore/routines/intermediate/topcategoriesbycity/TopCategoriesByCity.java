@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 // Para executar configure os argumentos da seguinte forma:
-// src/main/resources/transactions_data.csv output/intermediate/top_categories_by_city
+// src/main/resources/transactions_data.csv output/spark_core/intermediate/top_categories_by_city
 
 /**
  * Rotina intermediária que identifica as top 3 categorias (MCC) mais frequentes por cidade.
