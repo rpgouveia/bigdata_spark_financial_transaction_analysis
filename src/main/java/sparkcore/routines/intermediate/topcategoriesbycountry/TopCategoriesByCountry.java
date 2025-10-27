@@ -7,6 +7,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 import java.util.*;
 import java.util.stream.Collectors;
+import sparkcore.routines.intermediate.topcategoriesbycity.CategoryCount;
 
 // Para executar configure os argumentos da seguinte forma:
 // src/main/resources/transactions_data.csv output/spark_core/intermediate/top_categories_by_country
