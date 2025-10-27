@@ -1,4 +1,4 @@
-package sparkcore.routines.intermediate.topcategoriesbycity;
+package routines.intermediate.topcategoriesbycity;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package sparkcore.routines.intermediate.topcategoriesbycountry;
+package routines.intermediate.topcategoriesbycountry;
 
 import java.util.HashMap;
 import java.util.Map;

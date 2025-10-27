@@ -1,4 +1,4 @@
-package sparkcore.routines.intermediate.topcategoriesbystate;
+package routines.intermediate.topcategoriesbystate;
 
 import routines.intermediate.topcategoriesbycountry.MCCDescriptionMapper;
 
