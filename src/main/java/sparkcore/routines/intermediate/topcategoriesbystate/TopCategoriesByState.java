@@ -1,13 +1,13 @@
-package routines.intermediate.topcategoriesbystate;
+package sparkcore.routines.intermediate.topcategoriesbystate;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
-import java.util.*;
-import java.util.stream.Collectors;
 import sparkcore.routines.intermediate.topcategoriesbycity.CategoryCount;
+
+import java.util.*;
 
 // Para executar configure os argumentos da seguinte forma:
 // src/main/resources/transactions_data.csv output/spark_core/intermediate/top_categories_by_state

@@ -1,4 +1,4 @@
-package routines.intermediate.citystatistics;
+package sparkcore.routines.intermediate.citystatistics;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
