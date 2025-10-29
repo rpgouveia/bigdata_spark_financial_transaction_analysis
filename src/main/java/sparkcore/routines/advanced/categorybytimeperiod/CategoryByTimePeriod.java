@@ -1,7 +1,7 @@
 package sparkcore.routines.advanced.categorybytimeperiod;
 
 // Para executar configure os argumentos da seguinte forma:
-// src/main/resources/transactions_data.csv output/advanced/category_by_time_period
+// src/main/resources/transactions_data.csv output/spark_core/advanced/category_by_time_period
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;

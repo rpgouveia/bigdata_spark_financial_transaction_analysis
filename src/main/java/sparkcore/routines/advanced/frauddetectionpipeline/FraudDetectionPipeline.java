@@ -1,7 +1,7 @@
 package sparkcore.routines.advanced.frauddetectionpipeline;
 
 // Para executar configure os argumentos da seguinte forma:
-// src/main/resources/transactions_data.csv output/advanced/fraud_detection_pipeline
+// src/main/resources/transactions_data.csv output/spark_core/advanced/fraud_detection_pipeline
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
