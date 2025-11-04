@@ -1,5 +1,10 @@
 package sparksql.routines.basic;
 
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
+import static org.apache.spark.sql.functions.*;
+
 // Para executar configure os argumentos da seguinte forma:
 // src/main/resources/transactions_data.csv output/spark_sql/basic/amount_by_client
 
@@ -7,12 +12,6 @@ package sparksql.routines.basic;
  * Rotina básica que calcula o valor total transacionado por cliente.
  * Agrupa transações por client_id e soma os valores.
  */
-
-import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SparkSession;
-import static org.apache.spark.sql.functions.*;
-
 public class AmountByClient {
 
     public static void main(String[] args) {
