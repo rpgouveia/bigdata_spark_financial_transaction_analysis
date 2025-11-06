@@ -8,7 +8,7 @@ import org.apache.spark.sql.expressions.WindowSpec;
 import org.apache.spark.sql.types.DataTypes;
 import java.util.Arrays;
 import java.util.List;
-
+import sparksql.utils.MCCDescriptionMapper;
 import static org.apache.spark.sql.functions.*;
 
 // Para executar configure os argumentos da seguinte forma:
