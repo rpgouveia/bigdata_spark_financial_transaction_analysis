@@ -55,7 +55,6 @@ public class TopCategoriesByState {
         spark.sparkContext().setLogLevel("WARN");
 
         // Registra UDF (User Defined Function) para buscar a descrição do MCC
-        // Reutiliza o Mapper do pacote 'topcategoriesbycountry'
         spark.udf().register("getMCCDescription",
                 (String mccCode) -> MCCDescriptionMapper.getDescription(mccCode),
                 DataTypes.StringType);
