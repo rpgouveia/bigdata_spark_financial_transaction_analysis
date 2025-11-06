@@ -32,8 +32,6 @@ import static org.apache.spark.sql.functions.*;
  *
  * 3. Ordenar:
  * - O resultado final e ordenado pela porcentagem de clientes de ALTO Risco (decrescente).
- *
- * (MODIFICADO): Salva a saida como CSV padrao.
  */
 public class ClientBehaviorChipUse {
 
@@ -115,8 +113,8 @@ public class ClientBehaviorChipUse {
                 .csv(inputPath);
 
         // Passo 1: Limpar e preparar transacoes
-        Column nz_state = upper(coalesce(trim(col("merchant_state")), lit("UNKNOWN")));
-        Column nz_city = upper(coalesce(trim(col("merchant_city")), lit("UNKNOWN")));
+        Column state = upper(coalesce(trim(col("merchant_state")), lit("UNKNOWN")));
+        Column city = upper(coalesce(trim(col("merchant_city")), lit("UNKNOWN")));
 
         Dataset<Row> transactions = rawData
                 // Seleciona e limpa colunas
@@ -124,8 +122,8 @@ public class ClientBehaviorChipUse {
                 .withColumn("amount_cents", call_udf("parseCentsUDF", col("amount")))
                 .withColumn("is_online", when(upper(trim(col("use_chip"))).equalTo("ONLINE TRANSACTION"), 1).otherwise(0))
                 .withColumn("has_error", when(col("errors").isNotNull().and(trim(col("errors")).notEqual("")), 1).otherwise(0))
-                .withColumn("state", nz_state)
-                .withColumn("city", nz_city)
+                .withColumn("state", state)
+                .withColumn("city", city)
                 // Filtra dados invalidos
                 .filter(col("client_id").isNotNull()
                         .and(col("client_id").notEqual(""))
@@ -237,7 +235,7 @@ public class ClientBehaviorChipUse {
                 // Ordena pela % de Alto Risco (descendente)
                 .orderBy(desc("high_risk_pct"));
 
-        // Passo 9: Selecionar colunas finais e salvar como CSV (MODIFICADO)
+        // Passo 9: Selecionar colunas finais e salvar como CSV
         Dataset<Row> csvOutput = finalResults
                 .select(
                         col("top_state").as("State"),
