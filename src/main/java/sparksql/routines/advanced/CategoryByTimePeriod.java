@@ -47,14 +47,10 @@ public class CategoryByTimePeriod {
         System.out.println("  - Top 3 categorias por período e cidade");
         System.out.println("  - Períodos: Manhã (0h-11h), Tarde (12h-17h), Noite (18h-23h)");
         System.out.println();
-        System.out.println("Arquitetura:");
-        System.out.println("  Hadoop: 2 jobs encadeados (Agregação + Ranking)");
-        System.out.println("  Spark SQL: 1 pipeline único");
-        System.out.println();
 
         // Verificação dos argumentos
         if (args.length < 2) {
-            System.err.println("Usage: CategoryByTimePeriodSQL <input_path> <output_path> [local]");
+            System.err.println("Usage: CategoryByTimePeriod <input_path> <output_path> [local]");
             System.err.println("  input_path: caminho do arquivo CSV de transações");
             System.err.println("  output_path: caminho do diretório de saída");
             System.err.println("  local: para execução local (opcional)");
