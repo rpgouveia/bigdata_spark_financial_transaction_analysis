@@ -71,7 +71,7 @@ public class FraudDetectionPipeline {
 
         // Verificação dos argumentos
         if (args.length < 2) {
-            System.err.println("Usage: RiskAnalysisPipelineSQL <input_path> <output_path> [local]");
+            System.err.println("Usage: FraudDetectionPipeline <input_path> <output_path> [local]");
             System.err.println("  input_path: caminho do arquivo CSV de transações");
             System.err.println("  output_path: caminho do diretório de saída");
             System.err.println("  local: para execução local (opcional)");
@@ -85,7 +85,7 @@ public class FraudDetectionPipeline {
 
         // Configurar SparkSession
         SparkSession.Builder sparkBuilder = SparkSession.builder()
-                .appName("RiskAnalysisPipeline-SparkSQL");
+                .appName("FraudDetectionPipeline-SparkSQL");
 
         if (localMode) {
             System.out.println("Configurando para execução local...");
