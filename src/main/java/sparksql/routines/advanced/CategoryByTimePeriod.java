@@ -1,4 +1,4 @@
-package sparksql.routines.advanced.categorybytimeperiod;
+package sparksql.routines.advanced;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;

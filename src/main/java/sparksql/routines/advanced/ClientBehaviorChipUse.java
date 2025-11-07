@@ -1,8 +1,7 @@
-package sparksql.routines.advanced.clientbehaviorchipuse;
+package sparksql.routines.advanced;
 
 import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.expressions.Window;

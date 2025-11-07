@@ -1,4 +1,4 @@
-package sparksql.routines.intermediate.topcategoriesbystate;
+package sparksql.routines.intermediate;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
