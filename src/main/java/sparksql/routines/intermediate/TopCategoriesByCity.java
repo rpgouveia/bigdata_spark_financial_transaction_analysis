@@ -11,7 +11,7 @@ import sparksql.utils.MCCDescriptionMapper;
 import static org.apache.spark.sql.functions.*;
 
 // Para executar configure os argumentos da seguinte forma:
-// src/main/resources/transactions_data.csv output/spark_sql/top_categories_by_city local
+// src/main/resources/transactions_data.csv output/spark_sql/advanced/top_categories_by_city local
 
 /**
  * TopCategoriesByCity usando Apache Spark SQL (DataFrames + Window Functions).
