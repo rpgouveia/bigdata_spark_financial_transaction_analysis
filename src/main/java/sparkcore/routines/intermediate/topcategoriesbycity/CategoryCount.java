@@ -1,5 +1,7 @@
 package sparkcore.routines.intermediate.topcategoriesbycity;
 
+import sparkcore.utils.MCCDescriptionMapper;
+
 import java.io.Serializable;
 
 

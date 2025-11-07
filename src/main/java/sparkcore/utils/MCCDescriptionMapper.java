@@ -1,4 +1,4 @@
-package sparkcore.routines.intermediate.topcategoriesbycity;
+package sparkcore.utils;
 
 import java.util.HashMap;
 import java.util.Map;

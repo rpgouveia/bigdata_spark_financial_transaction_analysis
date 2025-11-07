@@ -8,7 +8,6 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import sparkcore.routines.intermediate.topcategoriesbycity.CategoryCount;
-import sparkcore.routines.intermediate.topcategoriesbycity.MCCDescriptionMapper;
 
 import scala.Tuple2;
 
