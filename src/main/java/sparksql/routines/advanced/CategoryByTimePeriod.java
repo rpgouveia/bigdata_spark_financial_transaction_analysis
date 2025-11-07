@@ -26,11 +26,11 @@ import static org.apache.spark.sql.functions.*;
  * - Job 1 → Agregação (cidade + período + MCC)
  * - Job 2 → Ranking (top 3 por cidade-período)
  *
- * SPARK CORE: 4 Stages com RDDs
- * - Stage 1 → Agregação (reduceByKey para contar MCCs)
- * - Stage 2 → Ranking (groupByKey + ordenação para top 3)
- * - Stage 3 → Totais (reduceByKey para volumes)
- * - Stage 4 → Join e ordenação final (join + sortByKey)
+ * SPARK CORE: 4 Etapas com RDDs
+ * - Etapa 1 → Agregação (reduceByKey para contar MCCs)
+ * - Etapa 2 → Ranking (groupByKey + ordenação para top 3)
+ * - Etapa 3 → Totais (reduceByKey para volumes)
+ * - Etapa 4 → Join e ordenação final (join + sortByKey)
  *
  * SPARK SQL: Pipeline Único
  * - DataFrame transformations → Agregação → Window Functions → Ranking
